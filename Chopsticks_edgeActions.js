@@ -1,6 +1,6 @@
 var stageRef;	
 var symbolRef;
-
+var endGameRef;
 var timer;
 
 var iP1Left = 1;
@@ -23,7 +23,7 @@ function InitGame()
 	//standaard is player 1 de eerste die mag beginnen -> zijn background wordt
 	//Hier wordt de game klaargezet (beide beginnen met 1 vinger per hand)	
 	
-	$(stageRef.lookupSelector("animation")).css('background-image', 'url(images/p1left-1.png)');	
+	//$(stageRef.lookupSelector("animation")).css('background-image', 'url(images/p1left-1.png)');	
 	$(stageRef.lookupSelector("p1Left")).css('background-image', 'url(images/p1left-1.png)');	
 	$(stageRef.lookupSelector("p1Right")).css('background-image', 'url(images/p1right-1.png)');	
 	$(stageRef.lookupSelector("p2Left")).css('background-image', 'url(images/p2left-1.png)');	
@@ -31,6 +31,24 @@ function InitGame()
 	
 	checkWhoPlays();
 	changeColor();
+}
+
+function resetGame()
+{	
+	iP1Left = 1;
+	iP1Right = 1;
+	iP2Left = 1;
+	iP2Right = 1;
+	sInitClick = "";
+	isPlayer1First = true;
+
+	isFirstClick = true;
+	isTurnP1 = true;
+	iTime = 0;
+	
+	InitGame();
+	stageRef.$("EndGame").css('visibility','hidden');
+	startTimer();
 }
 
 function checkWhoPlays()
@@ -125,15 +143,32 @@ function checkScore()
 	}
 }
 
+function pushScore()
+{
+	$.get("addscore.php?game_name="+sPlayer1Name+" vs. "+sPlayer2Name+"&game_time="+iTime); 
+}
+
 function startTimer()
 {
-	console.log("timer wordt gestart");
 	timer = setInterval(function(){iTime +=1},100);
 }
 
 function stopGame()
 {
 	clearInterval(timer);
+	stageRef.$("EndGame").css('visibility','visible');
+	pushScore();
+	console.log("------------------------");
+	console.log(iP1Left);
+	console.log(iP1Right);
+	console.log(iP2Left);
+	console.log(iP2Right);
+	console.log(sInitClick);
+	console.log(isPlayer1First);
+	console.log(sPlayer1Name);
+	console.log(sPlayer2Name);
+	console.log(isFirstClick);
+	console.log(isTurnP1);
 	console.log(iTime);
 }
 
@@ -174,7 +209,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          // insert code to be run when the symbol is created here
          //Stage Creation Complete
          stageRef = sym;
-         
+         stageRef.$("EndGame").css('visibility','hidden');
          var nameP1 = sym.$("lblP1")
          nameP1.html("Speler 1: ");
          inputNameP1 = $('<input />').attr({'type':'text', 'value':'', 'id':'nameP1'});
@@ -307,7 +342,6 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          	changeColor();
          	checkScore();
          }
-
       });
       //Edge binding end
 
@@ -474,7 +508,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindSymbolAction(compId, symbolName, "creationComplete", function(sym, e) {
          // insert code to be run when the symbol is created here
          symbolRef = sym;
-         //playBeginSound();
+         playBeginSound();
 
       });
       //Edge binding end
@@ -510,5 +544,30 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
    })("glowLoading");
    //Edge symbol end:'glowLoading'
+
+   //=========================================================
+   
+   //Edge symbol: 'EndGame'
+   (function(symbolName) {   
+   
+      
+
+      Symbol.bindElementAction(compId, symbolName, "${_txtAgain}", "click", function(sym, e) {
+         // insert code for mouse click here
+         console.log("je speelt opnieuw");
+         resetGame();
+
+      });
+      //Edge binding end
+
+      Symbol.bindSymbolAction(compId, symbolName, "creationComplete", function(sym, e) {
+         // insert code to be run when the symbol is created here
+         endGameRef = sym;
+
+      });
+      //Edge binding end
+
+   })("EndGame");
+   //Edge symbol end:'EndGame'
 
 })(jQuery, AdobeEdge, "EDGE-423933296");
