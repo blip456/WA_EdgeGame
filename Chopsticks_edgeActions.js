@@ -1,6 +1,8 @@
 var stageRef;	
 var symbolRef;
 
+var timer;
+
 var iP1Left = 1;
 var iP1Right = 1;
 var iP2Left = 1;
@@ -13,6 +15,8 @@ var sPlayer2Name = "Player 2";
 
 var isFirstClick = true;
 var isTurnP1 = true;
+
+var iTime = 0;
 
 function InitGame()
 {
@@ -110,18 +114,27 @@ function checkScore()
 	if(iP1Left == 0 && iP1Right == 0)
 	{
 		console.log("game over voor player 1");
+		stopGame();
 		playEndSound();
 	}
 	if(iP2Left == 0 && iP2Right == 0)
 	{
 		console.log("game over voor player 2");
+		stopGame();
 		playEndSound();
 	}
 }
 
+function startTimer()
+{
+	console.log("timer wordt gestart");
+	timer = setInterval(function(){iTime +=1},100);
+}
+
 function stopGame()
 {
-	
+	clearInterval(timer);
+	console.log(iTime);
 }
 
 function changeColor()
@@ -445,7 +458,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          $(stageRef.lookupSelector("txtPlayer2")).html(sPlayer2Name);
          
          checkWhoPlays();
-         
+         startTimer();
          //nog een functie hebben die te timer start
          
          
