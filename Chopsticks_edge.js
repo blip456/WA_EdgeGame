@@ -129,29 +129,8 @@ var symbols = {
    states: {
       "Base State": {
          "${_recPlayer1}": [
-            ["style", "height", '100px'],
             ["style", "top", '700px'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
-         ],
-         "${_p2Left}": [
-            ["style", "top", '120px'],
-            ["style", "height", '255px'],
-            ["color", "background-color", 'rgba(255,187,51,1.00)'],
-            ["style", "left", '210px'],
-            ["style", "width", '170px']
-         ],
-         "${_lblP2}": [
-            ["style", "top", '620px'],
-            ["style", "display", 'none'],
-            ["style", "height", '50px'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
-         ],
-         "${_recCenter}": [
-            ["color", "background-color", 'rgba(153,204,0,1.00)'],
-            ["style", "height", '10px'],
-            ["style", "top", '395px'],
+            ["style", "height", '100px'],
             ["style", "left", '0px'],
             ["style", "width", '400px']
          ],
@@ -162,15 +141,12 @@ var symbols = {
             ["style", "left", '20px'],
             ["style", "width", '170px']
          ],
-         "${_txtPlayer1}": [
-            ["style", "top", '720px'],
-            ["style", "font-size", '50px'],
-            ["style", "text-align", 'center'],
-            ["style", "text-decoration", 'none'],
-            ["color", "color", 'rgba(255,255,255,1.00)'],
-            ["style", "font-family", 'Verdana, Geneva, sans-serif'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
+         "${_p2Left}": [
+            ["style", "top", '120px'],
+            ["style", "height", '255px'],
+            ["color", "background-color", 'rgba(255,187,51,1.00)'],
+            ["style", "left", '210px'],
+            ["style", "width", '170px']
          ],
          "${_recPlayer2}": [
             ["style", "top", '0px'],
@@ -186,23 +162,10 @@ var symbols = {
          ],
          "${_lblP1}": [
             ["style", "top", '566px'],
-            ["style", "height", '50px'],
             ["style", "display", 'none'],
+            ["style", "height", '50px'],
             ["style", "left", '0px'],
             ["style", "width", '400px']
-         ],
-         "${_Stage}": [
-            ["color", "background-color", 'rgba(228,229,228,1.00)'],
-            ["style", "width", '400px'],
-            ["style", "height", '800px'],
-            ["style", "overflow", 'hidden']
-         ],
-         "${_p1Right}": [
-            ["style", "top", '425px'],
-            ["style", "height", '255px'],
-            ["color", "background-color", 'rgba(204,0,0,1.00)'],
-            ["style", "left", '210px'],
-            ["style", "width", '170px']
          ],
          "${_txtPlayer2}": [
             ["transform", "rotateZ", '180deg'],
@@ -213,6 +176,43 @@ var symbols = {
             ["style", "text-align", 'center'],
             ["style", "font-family", 'Verdana, Geneva, sans-serif'],
             ["style", "text-decoration", 'none'],
+            ["style", "width", '400px']
+         ],
+         "${_p1Right}": [
+            ["style", "top", '425px'],
+            ["style", "height", '255px'],
+            ["color", "background-color", 'rgba(204,0,0,1.00)'],
+            ["style", "left", '210px'],
+            ["style", "width", '170px']
+         ],
+         "${_Stage}": [
+            ["color", "background-color", 'rgba(228,229,228,1.00)'],
+            ["style", "overflow", 'hidden'],
+            ["style", "height", '800px'],
+            ["style", "width", '400px']
+         ],
+         "${_txtPlayer1}": [
+            ["style", "top", '720px'],
+            ["style", "width", '400px'],
+            ["style", "text-align", 'center'],
+            ["style", "left", '0px'],
+            ["color", "color", 'rgba(255,255,255,1.00)'],
+            ["style", "font-family", 'Verdana, Geneva, sans-serif'],
+            ["style", "text-decoration", 'none'],
+            ["style", "font-size", '50px']
+         ],
+         "${_lblP2}": [
+            ["style", "top", '620px'],
+            ["style", "height", '50px'],
+            ["style", "display", 'none'],
+            ["style", "left", '0px'],
+            ["style", "width", '400px']
+         ],
+         "${_recCenter}": [
+            ["color", "background-color", 'rgba(153,204,0,1.00)'],
+            ["style", "height", '10px'],
+            ["style", "top", '395px'],
+            ["style", "left", '0px'],
             ["style", "width", '400px']
          ]
       }
@@ -227,8 +227,8 @@ var symbols = {
             "e": 0
          },
          timeline: [
-            { id: "eid32", tween: [ "style", "${_lblP2}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" },
-            { id: "eid20", tween: [ "style", "${_lblP1}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" }         ]
+            { id: "eid20", tween: [ "style", "${_lblP1}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" },
+            { id: "eid32", tween: [ "style", "${_lblP2}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" }         ]
       }
    }
 },
@@ -308,34 +308,53 @@ var symbols = {
       "Base State": {
          "${_playButton}": [
             ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
-            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
-            ["subproperty", "filter.drop-shadow.offsetH", '2px'],
+            ["subproperty", "filter.drop-shadow.blur", '0px'],
+            ["style", "font-size", '65px'],
             ["color", "color", 'rgba(255,255,255,1)'],
             ["style", "opacity", '1'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px'],
+            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
+            ["subproperty", "filter.drop-shadow.offsetH", '2px'],
             ["style", "top", '120px'],
-            ["subproperty", "filter.blur", '0px'],
-            ["style", "text-align", 'center'],
-            ["style", "display", 'none'],
-            ["style", "height", '100px'],
             ["style", "font-family", 'merienda-one, cursive'],
-            ["style", "font-size", '65px'],
-            ["subproperty", "filter.drop-shadow.blur", '0px']
+            ["style", "text-align", 'center'],
+            ["style", "height", '100px'],
+            ["style", "display", 'none'],
+            ["subproperty", "filter.blur", '0px'],
+            ["style", "width", '400px'],
+            ["style", "left", '0px']
          ],
          "${_splashscreen2}": [
             ["style", "left", '0px'],
             ["style", "top", '0px']
          ],
+         "${symbolSelector}": [
+            ["style", "height", '800px'],
+            ["style", "width", '400px']
+         ],
          "${_loader}": [
             ["style", "top", '586px'],
             ["style", "display", 'none'],
-            ["color", "background-color", 'rgba(102,153,0,1.00)'],
+            ["style", "height", '26px'],
             ["style", "left", '97px'],
-            ["style", "height", '26px']
+            ["color", "background-color", 'rgba(102,153,0,1.00)']
          ],
-         "${symbolSelector}": [
+         "${_button}": [
+            ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
+            ["style", "left", '20px'],
+            ["style", "width", '360px'],
+            ["style", "top", '120px'],
+            ["subproperty", "filter.drop-shadow.offsetV", '0px'],
+            ["subproperty", "filter.drop-shadow.offsetH", '0px'],
+            ["style", "display", 'none'],
+            ["subproperty", "filter.blur", '0px'],
+            ["style", "height", '100px'],
+            ["subproperty", "filter.invert", '0']
+         ],
+         "${_Rectangle}": [
+            ["style", "top", '0px'],
             ["style", "height", '800px'],
+            ["color", "background-color", 'rgba(255,255,255,1.00)'],
+            ["style", "left", '0px'],
             ["style", "width", '400px']
          ],
          "${_Chopsticks}": [
@@ -348,25 +367,6 @@ var symbols = {
             ["style", "height", '100px'],
             ["style", "font-family", 'merienda-one, cursive'],
             ["style", "width", '400px']
-         ],
-         "${_Rectangle}": [
-            ["style", "top", '0px'],
-            ["style", "height", '800px'],
-            ["color", "background-color", 'rgba(255,255,255,1.00)'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
-         ],
-         "${_button}": [
-            ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
-            ["style", "left", '20px'],
-            ["style", "width", '360px'],
-            ["style", "top", '120px'],
-            ["style", "display", 'none'],
-            ["subproperty", "filter.invert", '0'],
-            ["style", "height", '100px'],
-            ["subproperty", "filter.blur", '0px'],
-            ["subproperty", "filter.drop-shadow.offsetH", '0px'],
-            ["subproperty", "filter.drop-shadow.offsetV", '0px']
          ],
          "${_glowLoading}": [
             ["style", "display", 'block']
@@ -384,12 +384,12 @@ var symbols = {
             { id: "eid12", tween: [ "style", "${_Chopsticks}", "opacity", '0', { fromValue: '1'}], position: 2500, duration: 500, easing: "swing" },
             { id: "eid6", tween: [ "style", "${_loader}", "height", '312px', { fromValue: '26px'}], position: 0, duration: 3000, easing: "swing" },
             { id: "eid19", tween: [ "style", "${_loader}", "display", 'block', { fromValue: 'none'}], position: 100, duration: 0, easing: "swing" },
+            { id: "eid16", tween: [ "style", "${_playButton}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0, easing: "swing" },
+            { id: "eid15", tween: [ "style", "${_playButton}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" },
+            { id: "eid44", tween: [ "style", "${_glowLoading}", "display", 'none', { fromValue: 'block'}], position: 3000, duration: 0, easing: "swing" },
             { id: "eid17", tween: [ "style", "${_button}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0, easing: "swing" },
             { id: "eid14", tween: [ "style", "${_button}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" },
-            { id: "eid44", tween: [ "style", "${_glowLoading}", "display", 'none', { fromValue: 'block'}], position: 3000, duration: 0, easing: "swing" },
-            { id: "eid4", tween: [ "style", "${_loader}", "top", '248px', { fromValue: '586px'}], position: 0, duration: 3000, easing: "swing" },
-            { id: "eid16", tween: [ "style", "${_playButton}", "display", 'none', { fromValue: 'none'}], position: 0, duration: 0, easing: "swing" },
-            { id: "eid15", tween: [ "style", "${_playButton}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" }         ]
+            { id: "eid4", tween: [ "style", "${_loader}", "top", '248px', { fromValue: '586px'}], position: 0, duration: 3000, easing: "swing" }         ]
       }
    }
 },
@@ -404,30 +404,30 @@ var symbols = {
    content: {
    dom: [
    {
-      rect: ['0px','0px','400px','40px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',25,'rgba(255,255,255,1)','normal','none','normal'],
+      type: 'text',
       id: 'loading',
       text: 'Loading',
       align: 'center',
-      type: 'text'
+      rect: ['0px','0px','400px','40px','auto','auto']
    }],
    symbolInstances: [
    ]
    },
    states: {
       "Base State": {
-         "${_loading}": [
-            ["style", "top", '0px'],
-            ["style", "width", '400px'],
-            ["style", "display", 'block'],
-            ["style", "opacity", '0.25'],
-            ["style", "height", '40px'],
-            ["style", "font-family", 'Trebuchet MS, Arial, Helvetica, sans-serif'],
-            ["style", "left", '0px'],
-            ["style", "font-size", '25px']
-         ],
          "${symbolSelector}": [
             ["style", "height", '40px'],
+            ["style", "width", '400px']
+         ],
+         "${_loading}": [
+            ["style", "top", '0px'],
+            ["style", "font-size", '25px'],
+            ["style", "height", '40px'],
+            ["style", "font-family", 'Trebuchet MS, Arial, Helvetica, sans-serif'],
+            ["style", "display", 'block'],
+            ["style", "opacity", '0.25'],
+            ["style", "left", '0px'],
             ["style", "width", '400px']
          ]
       }
@@ -480,7 +480,7 @@ var symbols = {
    {
       rect: ['0px','0px','400px','100px','auto','auto'],
       transform: [[],['180']],
-      id: 'recPlayer1WinCopy',
+      id: 'recPlayer2Win',
       stroke: [0,'rgb(0, 0, 0)','none'],
       type: 'rect',
       fill: ['rgba(255,187,51,1.00)']
@@ -489,7 +489,7 @@ var symbols = {
       rect: ['0px','35px','400px','60px','auto','auto'],
       transform: [[],['180']],
       font: ['\'Trebuchet MS\', Arial, Helvetica, sans-serif',60,'rgba(255,255,255,1)','normal','none','normal'],
-      id: 'txtEndGameP1Copy',
+      id: 'txtEndGameP2',
       text: 'You WIN!',
       align: 'center',
       type: 'text'
@@ -516,18 +516,11 @@ var symbols = {
    },
    states: {
       "Base State": {
-         "${_recPlayer1WinCopy}": [
-            ["color", "background-color", 'rgba(255,187,51,1.00)'],
-            ["transform", "rotateZ", '180deg'],
-            ["style", "height", '100px'],
-            ["style", "left", '0px'],
-            ["style", "top", '0px']
-         ],
          "${_recEndGame}": [
-            ["style", "height", '800px'],
             ["style", "top", '0px'],
+            ["color", "background-color", 'rgba(153,204,0,1.00)'],
             ["style", "left", '0px'],
-            ["color", "background-color", 'rgba(153,204,0,1.00)']
+            ["style", "height", '800px']
          ],
          "${_btnPlayAgain}": [
             ["style", "top", '350px'],
@@ -537,23 +530,22 @@ var symbols = {
          "${_txtEndGameP1}": [
             ["style", "top", '705px'],
             ["style", "height", '60px'],
-            ["style", "width", '400px'],
-            ["style", "left", '0px'],
-            ["style", "font-size", '60px']
-         ],
-         "${_recPlayer1Win}": [
-            ["style", "height", '100px'],
-            ["style", "top", '700px'],
-            ["style", "left", '0px'],
-            ["color", "background-color", 'rgba(255,68,68,1.00)']
-         ],
-         "${_txtEndGameP1Copy}": [
-            ["style", "top", '35px'],
-            ["transform", "rotateZ", '180deg'],
-            ["style", "height", '60px'],
             ["style", "font-size", '60px'],
             ["style", "left", '0px'],
             ["style", "width", '400px']
+         ],
+         "${_recPlayer1Win}": [
+            ["style", "top", '700px'],
+            ["color", "background-color", 'rgba(255,68,68,1.00)'],
+            ["style", "left", '0px'],
+            ["style", "height", '100px']
+         ],
+         "${_recPlayer2Win}": [
+            ["color", "background-color", 'rgba(255,187,51,1.00)'],
+            ["transform", "rotateZ", '180deg'],
+            ["style", "height", '100px'],
+            ["style", "left", '0px'],
+            ["style", "top", '0px']
          ],
          "${symbolSelector}": [
             ["style", "height", '800px'],
@@ -561,12 +553,20 @@ var symbols = {
          ],
          "${_txtAgain}": [
             ["style", "top", '350px'],
-            ["style", "left", '26px'],
-            ["style", "width", '360px'],
+            ["subproperty", "filter.drop-shadow.offsetH", '2px'],
+            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
             ["style", "height", '100px'],
             ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
-            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
-            ["subproperty", "filter.drop-shadow.offsetH", '2px']
+            ["style", "left", '26px'],
+            ["style", "width", '360px']
+         ],
+         "${_txtEndGameP2}": [
+            ["style", "top", '35px'],
+            ["transform", "rotateZ", '180deg'],
+            ["style", "height", '60px'],
+            ["style", "width", '400px'],
+            ["style", "left", '0px'],
+            ["style", "font-size", '60px']
          ]
       }
    },

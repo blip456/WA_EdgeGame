@@ -10,6 +10,8 @@ var iP2Right = 1;
 var sInitClick = "";
 var isPlayer1First = true;
 
+var sWinner = "";
+
 var sPlayer1Name = "Player 1";
 var sPlayer2Name = "Player 2";
 
@@ -23,7 +25,6 @@ function InitGame()
 	//standaard is player 1 de eerste die mag beginnen -> zijn background wordt
 	//Hier wordt de game klaargezet (beide beginnen met 1 vinger per hand)	
 	
-	//$(stageRef.lookupSelector("animation")).css('background-image', 'url(images/p1left-1.png)');	
 	$(stageRef.lookupSelector("p1Left")).css('background-image', 'url(images/p1left-1.png)');	
 	$(stageRef.lookupSelector("p1Right")).css('background-image', 'url(images/p1right-1.png)');	
 	$(stageRef.lookupSelector("p2Left")).css('background-image', 'url(images/p2left-1.png)');	
@@ -42,6 +43,8 @@ function resetGame()
 	sInitClick = "";
 	isPlayer1First = true;
 
+	sWinner = "";
+	
 	isFirstClick = true;
 	isTurnP1 = true;
 	iTime = 0;
@@ -64,6 +67,16 @@ function checkWhoPlays()
 		$(stageRef.lookupSelector("txtPlayer2")).html("Jouw beurt");
 		$(stageRef.lookupSelector("txtPlayer1")).html(sPlayer1Name);
 	}
+}
+function overhandler()
+{
+	var ani = stageRef.getSymbol("animation");
+	$(ani.lookupSelector("playButton")).css('cursor','pointer');
+}
+
+function mouseOver(sItem)
+{
+	$(stageRef.lookupSelector(sItem)).css('cursor','pointer');
 }
 
 function GameLogic(iValue)
@@ -132,14 +145,16 @@ function checkScore()
 	if(iP1Left == 0 && iP1Right == 0)
 	{
 		console.log("game over voor player 1");
+		sWinner = "player2";
 		stopGame();
-		playEndSound();
+		playEndSound();		
 	}
 	if(iP2Left == 0 && iP2Right == 0)
 	{
 		console.log("game over voor player 2");
+		sWinner = "player1";
 		stopGame();
-		playEndSound();
+		playEndSound();		
 	}
 }
 
@@ -158,18 +173,21 @@ function stopGame()
 	clearInterval(timer);
 	stageRef.$("EndGame").css('visibility','visible');
 	pushScore();
-	console.log("------------------------");
-	console.log(iP1Left);
-	console.log(iP1Right);
-	console.log(iP2Left);
-	console.log(iP2Right);
-	console.log(sInitClick);
-	console.log(isPlayer1First);
-	console.log(sPlayer1Name);
-	console.log(sPlayer2Name);
-	console.log(isFirstClick);
-	console.log(isTurnP1);
-	console.log(iTime);
+	var end = stageRef.getSymbol("EndGame");
+	$(end.lookupSelector("txtAgain")).css('cursor','pointer');	
+	console.log(sWinner);
+	if(sWinner == "player1")
+	{
+		console.log("player 1 wins");
+		$(end.lookupSelector("txtEndGameP1")).html("You won");
+		$(end.lookupSelector("txtEndGameP2")).html("You lost");
+	}
+	if(sWinner == "player2")
+	{
+		console.log("player 2 wins");
+		$(end.lookupSelector("txtEndGameP1")).html("You lost");
+		$(end.lookupSelector("txtEndGameP2")).html("You won");
+	}
 }
 
 function changeColor()
@@ -458,6 +476,35 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
+      Symbol.bindElementAction(compId, symbolName, "${_p1Left}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         console.log("p1 mouse over");
+         mouseOver("p1Left");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_p1Right}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOver("p1Right");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_p2Right}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOver("p2Right");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_p2Left}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOver("p2Left");
+
+      });
+      //Edge binding end
+
    })("stage");
    //Edge symbol end:'stage'
 
@@ -493,7 +540,6 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          
          checkWhoPlays();
          startTimer();
-         //nog een functie hebben die te timer start
          
          
          
@@ -516,7 +562,14 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_playButton}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
          //pointer aanpassen lukt nog niet
-         $(stageRef.lookupSelector("playButton")).css('cursor','pointer');	
+         // sym.$("name") resolves an Edge Animate element name to a DOM
+         // element that can be used with jQuery
+         var element = stageRef.$("playButton");
+         
+         overhandler();
+         
+         $(stageRef.lookupSelector("button")).css('cursor','pointer');	
+         
 
       });
       //Edge binding end
