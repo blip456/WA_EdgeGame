@@ -158,36 +158,36 @@ function checkScore()
 	}
 }
 
-function pushScore()
-{
-	$.get("addscore.php?game_name="+sPlayer1Name+" vs. "+sPlayer2Name+"&game_time="+iTime); 
-}
-
 function startTimer()
 {
 	timer = setInterval(function(){iTime +=1},100);
 }
 
 function stopGame()
-{
+{	
 	clearInterval(timer);
-	stageRef.$("EndGame").css('visibility','visible');
-	pushScore();
+	stageRef.$("EndGame").css('visibility','visible');	
 	var end = stageRef.getSymbol("EndGame");
 	$(end.lookupSelector("txtAgain")).css('cursor','pointer');	
-	console.log(sWinner);
 	if(sWinner == "player1")
 	{
 		console.log("player 1 wins");
+		sWinner = sPlayer1Name;
 		$(end.lookupSelector("txtEndGameP1")).html("You won");
 		$(end.lookupSelector("txtEndGameP2")).html("You lost");
 	}
 	if(sWinner == "player2")
 	{
+		sWinner = sPlayer2Name;
 		console.log("player 2 wins");
 		$(end.lookupSelector("txtEndGameP1")).html("You lost");
 		$(end.lookupSelector("txtEndGameP2")).html("You won");
 	}
+	
+	iTime = iTime/10;
+	console.log(iTime);
+	//pushes score to DB
+	$.get("php/addscore.php?highscore_name="+sPlayer1Name+" vs. "+sPlayer2Name+"&highscore_winner="+sWinner+"&highscore_score="+iTime); ;
 }
 
 function changeColor()
