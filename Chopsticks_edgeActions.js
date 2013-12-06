@@ -3,6 +3,8 @@ var symbolRef;
 var endGameRef;
 var timer;
 
+var arrScores = new Array();
+
 var iP1Left = 1;
 var iP1Right = 1;
 var iP2Left = 1;
@@ -190,6 +192,32 @@ function stopGame()
 	$.get("php/addscore.php?highscore_name="+sPlayer1Name+" vs. "+sPlayer2Name+"&highscore_winner="+sWinner+"&highscore_score="+iTime); ;
 }
 
+function getData()
+{
+	console.log("get Data");
+	$.getJSON('php/highscore.php', function(data)
+	{
+		arrScores = data;
+		highsore();
+	});
+	
+}
+
+function highsore()
+{	
+	console.log(arrScores);	
+	var high = stageRef.getSymbol("highscore");
+	var ii = 1;
+	for(var i = 0; i < arrScores.length; i++)
+	{
+		var name = arrScores[i]["highscores_winner"];
+		var score = arrScores[i]["highscores_score"];
+		console.log("txt"+ii);
+		$(high.lookupSelector("txt"+ii)).html(ii+". "+name+": " + score + '"');
+		ii+=1;
+	}
+}
+
 function changeColor()
 {
 	if(isTurnP1 == true)
@@ -228,6 +256,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          //Stage Creation Complete
          stageRef = sym;
          stageRef.$("EndGame").css('visibility','hidden');
+         stageRef.$("highscore").css('visibility','hidden');
          var nameP1 = sym.$("lblP1")
          nameP1.html("Speler 1: ");
          inputNameP1 = $('<input />').attr({'type':'text', 'value':'', 'id':'nameP1'});
@@ -579,6 +608,25 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
+      Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "click", function(sym, e) {
+         // insert code for mouse click here
+         //open de highscore
+         stageRef.$("highscore").css('visibility','visible');
+         getData();
+         
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOver("btnHigh");
+         console.log("btnHigh");
+         $(stageRef.lookupSelector("btnHigh")).css('cursor','pointer');
+
+      });
+      //Edge binding end
+
    })("animation");
    //Edge symbol end:'animation'
 
@@ -622,5 +670,28 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
    })("EndGame");
    //Edge symbol end:'EndGame'
+
+   //=========================================================
+   
+   //Edge symbol: 'Preloader'
+   (function(symbolName) {   
+   
+   })("Preloader");
+   //Edge symbol end:'Preloader'
+
+   //=========================================================
+   
+   //Edge symbol: 'highscore'
+   (function(symbolName) {   
+   
+      Symbol.bindElementAction(compId, symbolName, "${_btnBack}", "click", function(sym, e) {
+         // insert code for mouse click here
+         stageRef.$("highscore").css('visibility','hidden');
+
+      });
+      //Edge binding end
+
+   })("highscore");
+   //Edge symbol end:'highscore'
 
 })(jQuery, AdobeEdge, "EDGE-423933296");

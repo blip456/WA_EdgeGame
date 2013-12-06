@@ -1,22 +1,28 @@
 <?php
-	$mysqli = new mysqli("localhost", "root", "usbw");
+	error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
+	$mysqli = new mysqli("localhost", "root", "usbw", "webgame");
 	if ($mysqli->errno) 
 	{
 		print("geen verbining");
 		exit();
 	}
 	else
-	{
-		if ($stmt = $mysqli->prepare("SELECT * FROM highscore ORDER BY game_time")) 
+	{		
+		$query = "SELECT * FROM highscore ORDER BY highscores_score ASC LIMIT 5";
+		$result = $mysqli->query($query);
+		
+		if ($result) 
 		{
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$arrResults = array();
-			while ($row = $result->fet_array(MYSQL_NUM)) 
-			{
-				array_push($arrResults, $row)
-			}
-			echo json_encode($arrResults);
-		}
+		
+				while ($row = $result->fetch_array(MYSQL_ASSOC)) 
+				{
+					$jsonarr[] = $row;	
+								
+				}
+				echo json_encode($jsonarr);
+		}	
+		
 	}
 ?>
