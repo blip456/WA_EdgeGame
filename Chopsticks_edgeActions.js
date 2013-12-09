@@ -68,12 +68,21 @@ function resetGame()
 	iP2Left = 1;
 	iP2Right = 1;
 	sInitClick = "";
-	isPlayer1First = true;
-
+	if(sWinner == "player1")
+	{
+		isPlayer1First = false;
+		isTurnP1 = false;
+	}
+	if(sWinner == "player2")
+	{
+		isPlayer1First = true;
+		isTurnP1 = true;
+	}
+	
 	sWinner = "";
 	
 	isFirstClick = true;
-	isTurnP1 = true;
+	
 	iTime = 0;
 	
 	InitGame();
@@ -711,6 +720,20 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_txtNew}", "click", function(sym, e) {
          // insert code for mouse click here
          newGame();
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnNew}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("EndGame", "btnNew");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_txtNew}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("EndGame", "txtNew");
 
       });
       //Edge binding end
