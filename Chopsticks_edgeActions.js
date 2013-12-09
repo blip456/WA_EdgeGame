@@ -36,6 +36,31 @@ function InitGame()
 	changeColor();
 }
 
+function newGame()
+{	
+	$(stageRef.lookupSelector("lblP2")).show();
+	$(stageRef.lookupSelector("lblP1")).show();
+	if(inputNameP1.attr("value") == "")
+	{
+		sPlayer1Name = "Speler 1";
+	}
+	else
+	{
+		sPlayer1Name = inputNameP1.attr("value");
+	}
+	if(inputNameP2.attr("value") == "")
+	{
+		sPlayer2Name = "Speler 2";
+	}
+	else
+	{
+		sPlayer2Name = inputNameP2.attr("value");
+	}
+	//resetGame();
+	$(stageRef.lookupSelector("animation")).show();
+	$(stageRef.lookupSelector("EndGame")).css('visibility','hidden');	
+}
+
 function resetGame()
 {	
 	iP1Left = 1;
@@ -52,7 +77,7 @@ function resetGame()
 	iTime = 0;
 	
 	InitGame();
-	stageRef.$("EndGame").css('visibility','hidden');
+	stageRef.$("EndGame").css('visibility','hidden');	
 	startTimer();
 }
 
@@ -70,13 +95,13 @@ function checkWhoPlays()
 		$(stageRef.lookupSelector("txtPlayer1")).html(sPlayer1Name);
 	}
 }
-function overhandler()
+function mouseOverSymbol(sSymbol, sItem)
 {
-	var ani = stageRef.getSymbol("animation");
-	$(ani.lookupSelector("playButton")).css('cursor','pointer');
+	var ref = stageRef.getSymbol(sSymbol);
+	$(ref.lookupSelector(sItem)).css('cursor','pointer');
 }
 
-function mouseOver(sItem)
+function mouseOverItem(sItem)
 {
 	$(stageRef.lookupSelector(sItem)).css('cursor','pointer');
 }
@@ -162,7 +187,7 @@ function checkScore()
 
 function startTimer()
 {
-	timer = setInterval(function(){iTime +=1},100);
+	timer = setInterval(function(){iTime +=1;},100);
 }
 
 function stopGame()
@@ -170,7 +195,7 @@ function stopGame()
 	clearInterval(timer);
 	stageRef.$("EndGame").css('visibility','visible');	
 	var end = stageRef.getSymbol("EndGame");
-	$(end.lookupSelector("txtAgain")).css('cursor','pointer');	
+	$(end.lookupSelector("txtAgain")).css('cursor','pointer');		
 	if(sWinner == "player1")
 	{
 		console.log("player 1 wins");
@@ -508,28 +533,28 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_p1Left}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
          console.log("p1 mouse over");
-         mouseOver("p1Left");
+         mouseOverItem("p1Left");
 
       });
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_p1Right}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
-         mouseOver("p1Right");
+         mouseOverItem("p1Right");
 
       });
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_p2Right}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
-         mouseOver("p2Right");
+         mouseOverItem("p2Right");
 
       });
       //Edge binding end
 
       Symbol.bindElementAction(compId, symbolName, "${_p2Left}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
-         mouseOver("p2Left");
+         mouseOverItem("p2Left");
 
       });
       //Edge binding end
@@ -560,13 +585,15 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          {
          	sPlayer2Name = inputNameP2.attr("value");
          }
-         $(stageRef.lookupSelector("lblP2")).remove();
-         $(stageRef.lookupSelector("lblP1")).remove();
-         stageRef.$("animation").delay(100).animate({opacity:0},200,"swing",function(){$(stageRef.lookupSelector("animation")).remove();});
+         $(stageRef.lookupSelector("lblP2")).hide();
+         $(stageRef.lookupSelector("lblP1")).hide();
+         
+         //stageRef.$("animation").delay(100).animate({opacity:0},200,"swing",function(){$(stageRef.lookupSelector("animation")).hide()});
+         $(stageRef.lookupSelector("animation")).fadeOut( 300, "linear");
          
          $(stageRef.lookupSelector("txtPlayer1")).html(sPlayer1Name);
          $(stageRef.lookupSelector("txtPlayer2")).html(sPlayer2Name);
-         
+         resetGame();
          checkWhoPlays();
          startTimer();
          
@@ -595,9 +622,9 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          // element that can be used with jQuery
          var element = stageRef.$("playButton");
          
-         overhandler();
+         mouseOverSymbol("animation", "playButton");
          
-         $(stageRef.lookupSelector("button")).css('cursor','pointer');	
+         //$(stageRef.lookupSelector("button")).css('cursor','pointer');	
          
 
       });
@@ -620,9 +647,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
       Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
-         mouseOver("btnHigh");
-         console.log("btnHigh");
-         $(stageRef.lookupSelector("btnHigh")).css('cursor','pointer');
+         mouseOverSymbol("animation", "btnHigh");
 
       });
       //Edge binding end
@@ -668,6 +693,28 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
+      Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("EndGame", "btnHigh");
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "click", function(sym, e) {
+         // insert code for mouse click here
+         stageRef.$("highscore").css('visibility','visible');
+         getData();
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_txtNew}", "click", function(sym, e) {
+         // insert code for mouse click here
+         newGame();
+
+      });
+      //Edge binding end
+
    })("EndGame");
    //Edge symbol end:'EndGame'
 
@@ -687,6 +734,13 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_btnBack}", "click", function(sym, e) {
          // insert code for mouse click here
          stageRef.$("highscore").css('visibility','hidden');
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnBack}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("highscore", "btnBack");
 
       });
       //Edge binding end
