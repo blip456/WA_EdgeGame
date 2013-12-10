@@ -119,11 +119,20 @@ var symbols = {
             id:'highscore',
             type:'rect',
             rect:['0','0','auto','auto','auto','auto']
+         },
+         {
+            id:'uitleg',
+            type:'rect',
+            rect:['0','0','auto','auto','auto','auto']
          }],
          symbolInstances: [
          {
             id:'highscore',
             symbolName:'highscore'
+         },
+         {
+            id:'uitleg',
+            symbolName:'uitleg'
          },
          {
             id:'EndGame',
@@ -143,15 +152,12 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "width", '400px']
          ],
-         "${_txtPlayer1}": [
-            ["style", "top", '720px'],
-            ["style", "font-size", '50px'],
-            ["style", "text-align", 'center'],
-            ["style", "text-decoration", 'none'],
-            ["color", "color", 'rgba(255,255,255,1.00)'],
-            ["style", "font-family", 'Verdana, Geneva, sans-serif'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
+         "${_p1Left}": [
+            ["style", "top", '425px'],
+            ["style", "height", '255px'],
+            ["color", "background-color", 'rgba(204,0,0,1.00)'],
+            ["style", "left", '20px'],
+            ["style", "width", '170px']
          ],
          "${_p2Left}": [
             ["style", "top", '120px'],
@@ -179,19 +185,22 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "width", '400px']
          ],
-         "${_p1Left}": [
+         "${_txtPlayer1}": [
+            ["style", "top", '720px'],
+            ["style", "font-size", '50px'],
+            ["style", "text-align", 'center'],
+            ["style", "text-decoration", 'none'],
+            ["color", "color", 'rgba(255,255,255,1.00)'],
+            ["style", "font-family", 'Verdana, Geneva, sans-serif'],
+            ["style", "left", '0px'],
+            ["style", "width", '400px']
+         ],
+         "${_p1Right}": [
             ["style", "top", '425px'],
             ["style", "height", '255px'],
             ["color", "background-color", 'rgba(204,0,0,1.00)'],
-            ["style", "left", '20px'],
+            ["style", "left", '210px'],
             ["style", "width", '170px']
-         ],
-         "${_lblP2}": [
-            ["style", "top", '620px'],
-            ["style", "display", 'none'],
-            ["style", "height", '50px'],
-            ["style", "left", '0px'],
-            ["style", "width", '400px']
          ],
          "${_Stage}": [
             ["color", "background-color", 'rgba(228,229,228,1.00)'],
@@ -210,12 +219,12 @@ var symbols = {
             ["style", "text-decoration", 'none'],
             ["style", "width", '400px']
          ],
-         "${_p1Right}": [
-            ["style", "top", '425px'],
-            ["style", "height", '255px'],
-            ["color", "background-color", 'rgba(204,0,0,1.00)'],
-            ["style", "left", '210px'],
-            ["style", "width", '170px']
+         "${_lblP2}": [
+            ["style", "top", '620px'],
+            ["style", "display", 'none'],
+            ["style", "height", '50px'],
+            ["style", "left", '0px'],
+            ["style", "width", '400px']
          ],
          "${_recCenter}": [
             ["color", "background-color", 'rgba(153,204,0,1.00)'],
@@ -231,7 +240,7 @@ var symbols = {
          fromState: "Base State",
          toState: "",
          duration: 3000,
-         autoPlay: true,
+         autoPlay: false,
          labels: {
             "e": 0
          },
@@ -252,15 +261,15 @@ var symbols = {
    content: {
    dom: [
    {
-      rect: ['0px','0px','400px','800px','auto','auto'],
+      type: 'rect',
       id: 'Rectangle',
       stroke: [0,'rgba(0,0,0,1)','none'],
-      type: 'rect',
+      rect: ['0px','0px','400px','800px','auto','auto'],
       fill: ['rgba(255,255,255,1.00)']
    },
    {
-      rect: ['97px','576px','232px','224px','auto','auto'],
       type: 'rect',
+      rect: ['97px','576px','232px','224px','auto','auto'],
       id: 'loader',
       stroke: [0,'rgb(0, 0, 0)','none'],
       display: 'none',
@@ -275,10 +284,10 @@ var symbols = {
    {
       font: ['merienda-one, cursive',65,'rgba(255,255,255,1.00)','normal','none',''],
       type: 'text',
-      align: 'center',
+      text: 'Chopsticks',
       id: 'Chopsticks',
       opacity: 1,
-      text: 'Chopsticks',
+      align: 'center',
       rect: ['0px','120px','400px','114px','auto','auto']
    },
    {
@@ -287,8 +296,8 @@ var symbols = {
       rect: ['0','560','auto','auto','auto','auto']
    },
    {
-      type: 'rect',
       rect: ['20px','120px','360px','100px','auto','auto'],
+      type: 'rect',
       borderRadius: ['10px','10px','10px','10px'],
       filter: [0,0,1,1,0,0,0,0,'rgba(0,0,0,1.00)',0,0,0],
       id: 'button',
@@ -300,21 +309,30 @@ var symbols = {
       type: 'text',
       id: 'playButton',
       opacity: 1,
-      rect: ['0px','120px','400px','100px','auto','auto'],
+      font: ['merienda-one, cursive',65,'rgba(255,255,255,1.00)','normal','none',''],
       filter: [0,0,1,1,0,0,0,0,'rgba(0,0,0,1.00)',2,2,0],
       display: 'none',
-      font: ['merienda-one, cursive',65,'rgba(255,255,255,1.00)','normal','none',''],
+      text: 'Play',
       align: 'center',
-      text: 'Play'
+      rect: ['0px','120px','400px','100px','auto','auto']
    },
    {
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
       type: 'text',
-      align: 'center',
+      display: 'none',
       id: 'btnHigh',
       text: 'Highscores',
-      display: 'none',
+      align: 'center',
       rect: ['0px','600px','400px','60px','auto','auto']
+   },
+   {
+      font: ['Trebuchet MS, Arial, Helvetica, sans-serif',25,'rgba(255,255,255,1)','normal','none','normal'],
+      type: 'text',
+      display: 'none',
+      id: 'btnUitleg',
+      text: 'Uitleg',
+      align: 'center',
+      rect: ['0px','750px','400px','25px','auto','auto']
    }],
    symbolInstances: [
    {
@@ -326,24 +344,60 @@ var symbols = {
       "Base State": {
          "${_playButton}": [
             ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
-            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
-            ["subproperty", "filter.drop-shadow.blur", '0px'],
-            ["color", "color", 'rgba(255,255,255,1)'],
-            ["style", "opacity", '1'],
             ["style", "left", '0px'],
             ["style", "font-size", '65px'],
+            ["color", "color", 'rgba(255,255,255,1)'],
+            ["style", "opacity", '1'],
+            ["subproperty", "filter.drop-shadow.offsetV", '2px'],
+            ["subproperty", "filter.drop-shadow.offsetH", '2px'],
             ["style", "top", '95px'],
             ["subproperty", "filter.blur", '0px'],
             ["style", "text-align", 'center'],
             ["style", "display", 'none'],
             ["style", "height", '100px'],
             ["style", "font-family", 'merienda-one, cursive'],
-            ["style", "width", '400px'],
-            ["subproperty", "filter.drop-shadow.offsetH", '2px']
+            ["subproperty", "filter.drop-shadow.blur", '0px'],
+            ["style", "width", '400px']
          ],
          "${_splashscreen2}": [
             ["style", "left", '0px'],
             ["style", "top", '0px']
+         ],
+         "${_btnUitleg}": [
+            ["style", "top", '750px'],
+            ["style", "font-size", '25px'],
+            ["style", "text-decoration", 'none'],
+            ["style", "display", 'none'],
+            ["style", "height", '25px'],
+            ["style", "font-family", '\'Trebuchet MS\', Arial, Helvetica, sans-serif'],
+            ["style", "left", '0px'],
+            ["style", "width", '400px']
+         ],
+         "${symbolSelector}": [
+            ["style", "height", '800px'],
+            ["style", "width", '400px']
+         ],
+         "${_button}": [
+            ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
+            ["style", "left", '20px'],
+            ["style", "width", '360px'],
+            ["style", "top", '95px'],
+            ["subproperty", "filter.invert", '0'],
+            ["style", "height", '100px'],
+            ["style", "display", 'none'],
+            ["subproperty", "filter.blur", '0px'],
+            ["subproperty", "filter.drop-shadow.offsetV", '0px'],
+            ["subproperty", "filter.drop-shadow.offsetH", '0px']
+         ],
+         "${_btnHigh}": [
+            ["style", "top", '675px'],
+            ["style", "width", '400px'],
+            ["style", "left", '0px'],
+            ["style", "height", '60px'],
+            ["style", "display", 'none'],
+            ["style", "font-family", 'Trebuchet MS, Arial, Helvetica, sans-serif'],
+            ["style", "text-decoration", 'none'],
+            ["style", "font-size", '35px']
          ],
          "${_Chopsticks}": [
             ["color", "color", 'rgba(255,255,255,1.00)'],
@@ -356,29 +410,6 @@ var symbols = {
             ["style", "font-family", 'merienda-one, cursive'],
             ["style", "width", '400px']
          ],
-         "${_loader}": [
-            ["style", "top", '586px'],
-            ["style", "display", 'none'],
-            ["color", "background-color", 'rgba(102,153,0,1.00)'],
-            ["style", "left", '97px'],
-            ["style", "height", '26px']
-         ],
-         "${symbolSelector}": [
-            ["style", "height", '800px'],
-            ["style", "width", '400px']
-         ],
-         "${_button}": [
-            ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
-            ["style", "left", '20px'],
-            ["style", "width", '360px'],
-            ["style", "top", '95px'],
-            ["style", "display", 'none'],
-            ["subproperty", "filter.invert", '0'],
-            ["style", "height", '100px'],
-            ["subproperty", "filter.blur", '0px'],
-            ["subproperty", "filter.drop-shadow.offsetH", '0px'],
-            ["subproperty", "filter.drop-shadow.offsetV", '0px']
-         ],
          "${_Rectangle}": [
             ["style", "top", '0px'],
             ["style", "height", '800px'],
@@ -386,15 +417,12 @@ var symbols = {
             ["style", "left", '0px'],
             ["style", "width", '400px']
          ],
-         "${_btnHigh}": [
-            ["style", "top", '675px'],
-            ["style", "width", '400px'],
-            ["style", "left", '0px'],
-            ["style", "height", '60px'],
-            ["style", "display", 'none'],
-            ["style", "font-family", 'Trebuchet MS, Arial, Helvetica, sans-serif'],
-            ["style", "text-decoration", 'none'],
-            ["style", "font-size", '35px']
+         "${_loader}": [
+            ["style", "top", '586px'],
+            ["style", "height", '26px'],
+            ["color", "background-color", 'rgba(102,153,0,1.00)'],
+            ["style", "left", '97px'],
+            ["style", "display", 'none']
          ],
          "${_glowLoading}": [
             ["style", "display", 'block']
@@ -414,6 +442,7 @@ var symbols = {
             { id: "eid15", tween: [ "style", "${_playButton}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0, easing: "swing" },
             { id: "eid4", tween: [ "style", "${_loader}", "top", '248px', { fromValue: '586px'}], position: 0, duration: 3000, easing: "swing" },
             { id: "eid53", tween: [ "style", "${_btnHigh}", "top", '675px', { fromValue: '675px'}], position: 3650, duration: 0, easing: "swing" },
+            { id: "eid122", tween: [ "style", "${_btnUitleg}", "display", 'block', { fromValue: 'none'}], position: 3000, duration: 0 },
             { id: "eid6", tween: [ "style", "${_loader}", "height", '312px', { fromValue: '26px'}], position: 0, duration: 3000, easing: "swing" },
             { id: "eid19", tween: [ "style", "${_loader}", "display", 'block', { fromValue: 'none'}], position: 100, duration: 0, easing: "swing" },
             { id: "eid58", tween: [ "style", "${_playButton}", "top", '95px', { fromValue: '95px'}], position: 3650, duration: 0 },
@@ -436,12 +465,12 @@ var symbols = {
    content: {
    dom: [
    {
+      font: ['Trebuchet MS, Arial, Helvetica, sans-serif',25,'rgba(255,255,255,1)','normal','none','normal'],
       type: 'text',
-      rect: ['0px','0px','400px','40px','auto','auto'],
       id: 'loading',
       text: 'Loading',
       align: 'center',
-      font: ['Trebuchet MS, Arial, Helvetica, sans-serif',25,'rgba(255,255,255,1)','normal','none','normal']
+      rect: ['0px','0px','400px','40px','auto','auto']
    }],
    symbolInstances: [
    ]
@@ -495,12 +524,12 @@ var symbols = {
       fill: ['rgba(153,204,0,1.00)']
    },
    {
+      rect: ['0px','525px','400px','60px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'btnHigh',
       text: 'Highscores',
       align: 'center',
-      rect: ['0px','525px','400px','60px','auto','auto']
+      type: 'text'
    },
    {
       rect: ['0px','805px','400px','100px','auto','auto'],
@@ -510,12 +539,12 @@ var symbols = {
       fill: ['rgba(255,68,68,1.00)']
    },
    {
+      rect: ['0px','820px','400px','60px','auto','auto'],
       font: ['\'Trebuchet MS\', Arial, Helvetica, sans-serif',60,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txtEndGameP1',
       text: 'You WIN!',
       align: 'center',
-      rect: ['0px','820px','400px','60px','auto','auto']
+      type: 'text'
    },
    {
       rect: ['0px','0px','400px','100px','auto','auto'],
@@ -526,13 +555,13 @@ var symbols = {
       fill: ['rgba(255,187,51,1.00)']
    },
    {
-      transform: [[0,0],['180']],
-      rect: ['0px','35px','400px','60px','auto','auto'],
+      font: ['\'Trebuchet MS\', Arial, Helvetica, sans-serif',60,'rgba(255,255,255,1)','normal','none','normal'],
       type: 'text',
+      transform: [[0,0],['180']],
       id: 'txtEndGameP2',
       text: 'You WIN!',
       align: 'center',
-      font: ['\'Trebuchet MS\', Arial, Helvetica, sans-serif',60,'rgba(255,255,255,1)','normal','none','normal']
+      rect: ['0px','35px','400px','60px','auto','auto']
    },
    {
       rect: ['20px','230px','360px','100px','auto','auto'],
@@ -544,13 +573,13 @@ var symbols = {
       fill: ['rgba(102,153,0,1)']
    },
    {
+      rect: ['26px','230px','360px','100px','auto','auto'],
       font: ['merienda-one, cursive',65,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       filter: [0,0,1,0.2,0,0,0,0,'rgba(0,0,0,1.00)',2,2,0],
       id: 'txtAgain',
       text: 'Again?',
       align: 'center',
-      rect: ['26px','230px','360px','100px','auto','auto']
+      type: 'text'
    },
    {
       rect: ['20px','350px','360px','100px','auto','auto'],
@@ -562,13 +591,13 @@ var symbols = {
       fill: ['rgba(102,153,0,1)']
    },
    {
+      rect: ['26px','350px','360px','100px','auto','auto'],
       font: ['merienda-one, cursive',65,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       filter: [0,0,1,0.2,0,0,0,0,'rgba(0,0,0,1.00)',2,2,0],
       id: 'txtNew',
       text: 'New',
       align: 'center',
-      rect: ['26px','350px','360px','100px','auto','auto']
+      type: 'text'
    }],
    symbolInstances: [
    ]
@@ -587,10 +616,10 @@ var symbols = {
             ["subproperty", "filter.saturate", '0.2']
          ],
          "${_recEndGame}": [
+            ["color", "background-color", 'rgba(153,204,0,1.00)'],
             ["style", "height", '800px'],
-            ["style", "top", '0px'],
             ["style", "left", '0px'],
-            ["color", "background-color", 'rgba(153,204,0,1.00)']
+            ["style", "top", '0px']
          ],
          "${_btnPlayAgain}": [
             ["style", "top", '230px'],
@@ -695,52 +724,52 @@ var symbols = {
       fill: ['rgba(192,192,192,1)']
    },
    {
+      rect: ['0px','70px','400px','100px','auto','auto'],
       font: ['merienda-one, cursive',65,'rgba(255,255,255,1.00)','normal','none',''],
-      type: 'text',
       id: 'txtHighscoreTitle',
       text: 'Highscore',
       align: 'center',
-      rect: ['0px','70px','400px','100px','auto','auto']
+      type: 'text'
    },
    {
+      rect: ['50px','200px','300px','35px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txt1',
       text: '1',
       align: 'left',
-      rect: ['50px','200px','300px','35px','auto','auto']
+      type: 'text'
    },
    {
+      rect: ['50px','275px','300px','35px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txt2',
       text: '2',
       align: 'left',
-      rect: ['50px','275px','300px','35px','auto','auto']
+      type: 'text'
    },
    {
+      rect: ['50px','350px','300px','35px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txt3',
       text: '3',
       align: 'left',
-      rect: ['50px','350px','300px','35px','auto','auto']
+      type: 'text'
    },
    {
+      rect: ['50px','425px','300px','35px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txt4',
       text: '4',
       align: 'left',
-      rect: ['50px','425px','300px','35px','auto','auto']
+      type: 'text'
    },
    {
+      rect: ['50px','500px','300px','35px','auto','auto'],
       font: ['Trebuchet MS, Arial, Helvetica, sans-serif',35,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       id: 'txt5',
       text: '5',
       align: 'left',
-      rect: ['50px','500px','300px','35px','auto','auto']
+      type: 'text'
    },
    {
       rect: ['20px','600px','360px','100px','auto','auto'],
@@ -751,13 +780,13 @@ var symbols = {
       fill: ['rgba(102,153,0,1.00)']
    },
    {
+      rect: ['0px','600px','400px','100px','auto','auto'],
       font: ['merienda-one, cursive',65,'rgba(255,255,255,1)','normal','none','normal'],
-      type: 'text',
       filter: [0,0,1,1,0,0,0,0,'rgba(0,0,0,1.00)',2,2,0],
       id: 'btnBack',
       text: 'Back',
       align: 'center',
-      rect: ['0px','600px','400px','100px','auto','auto']
+      type: 'text'
    }],
    symbolInstances: [
    ]
@@ -781,8 +810,8 @@ var symbols = {
             ["style", "left", '50px'],
             ["style", "font-size", '35px']
          ],
-         "${_txt3}": [
-            ["style", "top", '350px'],
+         "${_txt2}": [
+            ["style", "top", '275px'],
             ["style", "text-align", 'left'],
             ["style", "width", '300px'],
             ["style", "height", '35px'],
@@ -808,16 +837,16 @@ var symbols = {
             ["style", "left", '50px'],
             ["style", "font-size", '35px']
          ],
+         "${symbolSelector}": [
+            ["style", "height", '800px'],
+            ["style", "width", '400px']
+         ],
          "${_btn}": [
             ["color", "background-color", 'rgba(102,153,0,1.00)'],
             ["style", "height", '100px'],
             ["style", "top", '600px'],
             ["style", "left", '20px'],
             ["style", "width", '360px']
-         ],
-         "${symbolSelector}": [
-            ["style", "height", '800px'],
-            ["style", "width", '400px']
          ],
          "${_btnBack}": [
             ["subproperty", "filter.drop-shadow.color", 'rgba(0,0,0,1.00)'],
@@ -842,8 +871,8 @@ var symbols = {
             ["style", "text-decoration", 'none'],
             ["style", "font-size", '65px']
          ],
-         "${_txt2}": [
-            ["style", "top", '275px'],
+         "${_txt3}": [
+            ["style", "top", '350px'],
             ["style", "text-align", 'left'],
             ["style", "width", '300px'],
             ["style", "height", '35px'],
@@ -862,6 +891,117 @@ var symbols = {
          timeline: [
             { id: "eid55", tween: [ "color", "${_recHighscoreBG}", "background-color", 'rgba(153,204,0,1.00)', { animationColorSpace: 'RGB', valueTemplate: undefined, fromValue: 'rgba(153,204,0,1.00)'}], position: 0, duration: 0 },
             { id: "eid54", tween: [ "style", "${_recHighscoreBG}", "display", 'block', { fromValue: 'block'}], position: 0, duration: 0 }         ]
+      }
+   }
+},
+"uitleg": {
+   version: "2.0.1",
+   minimumCompatibleVersion: "2.0.0",
+   build: "2.0.1.268",
+   baseState: "Base State",
+   initialState: "Base State",
+   gpuAccelerate: false,
+   resizeInstances: false,
+   content: {
+   dom: [
+   {
+      id: 'step1',
+      type: 'image',
+      rect: ['0px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step1.PNG','0px','0px']
+   },
+   {
+      id: 'step2',
+      type: 'image',
+      rect: ['400px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step2.PNG','0px','0px']
+   },
+   {
+      id: 'step3',
+      type: 'image',
+      rect: ['800px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step3.PNG','0px','0px']
+   },
+   {
+      id: 'step4',
+      type: 'image',
+      rect: ['1200px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step4.PNG','0px','0px']
+   },
+   {
+      id: 'step5',
+      type: 'image',
+      rect: ['1600px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step5.PNG','0px','0px']
+   },
+   {
+      id: 'step6',
+      type: 'image',
+      rect: ['2000px','0px','400px','800px','auto','auto'],
+      fill: ['rgba(0,0,0,0)','images/step6.PNG','0px','0px']
+   },
+   {
+      rect: ['300px','350px','100px','100px','auto','auto'],
+      id: 'btnNext',
+      stroke: [0,'rgb(0, 0, 0)','none'],
+      type: 'rect',
+      fill: ['rgba(0,0,0,0.40)']
+   }],
+   symbolInstances: [
+   ]
+   },
+   states: {
+      "Base State": {
+         "${_step2}": [
+            ["style", "left", '400px'],
+            ["style", "top", '0px']
+         ],
+         "${_btnNext}": [
+            ["style", "top", '350px'],
+            ["style", "height", '100px'],
+            ["color", "background-color", 'rgba(0,0,0,0.40)'],
+            ["style", "left", '300px'],
+            ["style", "width", '100px']
+         ],
+         "${_step4}": [
+            ["style", "left", '1200px'],
+            ["style", "top", '0px']
+         ],
+         "${symbolSelector}": [
+            ["style", "height", '800px'],
+            ["style", "width", '2400px']
+         ],
+         "${_step5}": [
+            ["style", "top", '0px'],
+            ["style", "left", '1600px']
+         ],
+         "${_step3}": [
+            ["style", "left", '800px'],
+            ["style", "top", '0px']
+         ],
+         "${_step6}": [
+            ["style", "left", '2000px'],
+            ["style", "top", '0px']
+         ],
+         "${_step1}": [
+            ["style", "top", '0px'],
+            ["style", "left", '0px']
+         ]
+      }
+   },
+   timelines: {
+      "Default Timeline": {
+         fromState: "Base State",
+         toState: "",
+         duration: 2500,
+         autoPlay: false,
+         timeline: [
+            { id: "eid116", tween: [ "style", "${_step6}", "left", '0px', { fromValue: '2000px'}], position: 0, duration: 2500 },
+            { id: "eid117", tween: [ "style", "${_step5}", "left", '-400px', { fromValue: '1600px'}], position: 0, duration: 2500 },
+            { id: "eid119", tween: [ "style", "${_step3}", "left", '-1200px', { fromValue: '800px'}], position: 0, duration: 2500 },
+            { id: "eid121", tween: [ "style", "${_step1}", "left", '-2000px', { fromValue: '0px'}], position: 0, duration: 2500 },
+            { id: "eid120", tween: [ "style", "${_step2}", "left", '-1600px', { fromValue: '400px'}], position: 0, duration: 2500 },
+            { id: "eid118", tween: [ "style", "${_step4}", "left", '-800px', { fromValue: '1200px'}], position: 0, duration: 2500 }         ]
       }
    }
 }

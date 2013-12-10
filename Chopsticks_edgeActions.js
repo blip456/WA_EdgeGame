@@ -1,7 +1,10 @@
 var stageRef;	
 var symbolRef;
 var endGameRef;
+var uitlegRef;
 var timer;
+
+var iStap = 0;
 
 var arrScores = new Array();
 
@@ -291,7 +294,8 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          stageRef = sym;
          stageRef.$("EndGame").css('visibility','hidden');
          stageRef.$("highscore").css('visibility','hidden');
-         var nameP1 = sym.$("lblP1")
+         stageRef.$("uitleg").css('visibility','hidden');
+         var nameP1 = sym.$("lblP1");
          nameP1.html("Speler 1: ");
          inputNameP1 = $('<input />').attr({'type':'text', 'value':'', 'id':'nameP1'});
          inputNameP1.css('height', 30);
@@ -299,7 +303,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          inputNameP1.css('width', 200);
          inputNameP1.appendTo(nameP1);
          
-         var nameP2 = sym.$("lblP2")
+         var nameP2 = sym.$("lblP2");
          nameP2.html("Speler 2: ");
          inputNameP2 = $('<input />').attr({'type':'text', 'value':'', 'id':'nameP2'});
          inputNameP2.css('height', 30);
@@ -661,6 +665,21 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       });
       //Edge binding end
 
+      Symbol.bindElementAction(compId, symbolName, "${_btnUitleg}", "click", function(sym, e) {
+         // insert code for mouse click here
+         console.log("klik op uitleg");
+         $(stageRef.lookupSelector("uitleg")).css('visibility','visible');
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnUitleg}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("animation","btnUitleg");
+
+      });
+      //Edge binding end
+
    })("animation");
    //Edge symbol end:'animation'
 
@@ -770,5 +789,112 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
    })("highscore");
    //Edge symbol end:'highscore'
+
+   //=========================================================
+   
+   //Edge symbol: 'uitleg'
+   (function(symbolName) {   
+   
+      Symbol.bindElementAction(compId, symbolName, "${_btnNext}", "click", function(sym, e) {
+         // insert code for mouse click here
+         // play the timeline from the given position (ms or label)
+         
+         if(iStap == 0)
+         {
+         	// play the timeline from the given position (ms or label)
+         	sym.play(0);
+         	
+         	iStap +=1;
+         }
+         else if(iStap == 1)
+         {
+         	uitlegRef.play(500);
+         
+         	iStap +=1;
+         }
+         else if(iStap == 2)
+         {
+         	uitlegRef.play(1000);
+         
+         	iStap +=1;
+         }
+         else if(iStap == 3)
+         {
+         	uitlegRef.play(1500);
+         
+         	iStap +=1;
+         }
+         else if(iStap == 4)
+         {
+         	uitlegRef.play(2000);
+         
+         	iStap +=1;
+         }
+         else if(iStap == 5)
+         {
+         	uitlegRef.play(2500);
+         
+         	iStap +=1;
+         }
+         else if(iStap == 6)
+         {
+         	$(stageRef.lookupSelector("uitleg")).css('visibility','hidden');
+         }
+
+      });
+      //Edge binding end
+
+      Symbol.bindSymbolAction(compId, symbolName, "creationComplete", function(sym, e) {
+         // insert code to be run when the symbol is created here
+         uitlegRef = sym;
+         $(uitlegRef.lookupSelector("btnNext")).css('background-image', 'url(images/arrow-left-small.png)');
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 500, function(sym, e) {
+         // insert code here
+         sym.stop();
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 1000, function(sym, e) {
+         // insert code here
+         sym.stop();
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 1500, function(sym, e) {
+         // insert code here
+         sym.stop();
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 2000, function(sym, e) {
+         // insert code here
+         sym.stop();
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 2500, function(sym, e) {
+         // insert code here
+         sym.stop();
+
+      });
+      //Edge binding end
+
+      Symbol.bindElementAction(compId, symbolName, "${_btnNext}", "mouseover", function(sym, e) {
+         // insert code to be run when the mouse hovers over the object
+         mouseOverSymbol("uitleg","btnNext");
+
+      });
+      //Edge binding end
+
+   })("uitleg");
+   //Edge symbol end:'uitleg'
 
 })(jQuery, AdobeEdge, "EDGE-423933296");
