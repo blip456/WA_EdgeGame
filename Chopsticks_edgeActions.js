@@ -803,7 +803,7 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          {
          	// play the timeline from the given position (ms or label)
          	sym.play(0);
-         	
+         
          	iStap +=1;
          }
          else if(iStap == 1)
@@ -833,13 +833,13 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          else if(iStap == 5)
          {
          	uitlegRef.play(2500);
-         
-         	iStap +=1;
-         }
-         else if(iStap == 6)
-         {
          	$(stageRef.lookupSelector("uitleg")).css('visibility','hidden');
+         	iStap =0;	
+         	// stop the timeline at the given position (ms or label)
+         	sym.stop(0);
+         	
          }
+         
 
       });
       //Edge binding end
