@@ -656,6 +656,8 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_btnHigh}", "click", function(sym, e) {
          // insert code for mouse click here
          //open de highscore
+         $(stageRef.lookupSelector("lblP1")).css('display','none');
+         $(stageRef.lookupSelector("lblP2")).css('display','none');
          stageRef.$("highscore").css('visibility','visible');
          getData();
          
@@ -672,7 +674,8 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
 
       Symbol.bindElementAction(compId, symbolName, "${_btnUitleg}", "click", function(sym, e) {
          // insert code for mouse click here
-         console.log("klik op uitleg");
+         $(stageRef.lookupSelector("lblP1")).css('display','none');
+         $(stageRef.lookupSelector("lblP2")).css('display','none');
          $(stageRef.lookupSelector("uitleg")).css('visibility','visible');
 
       });
@@ -847,10 +850,12 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          {
          	uitlegRef.play(2500);
          	$(stageRef.lookupSelector("uitleg")).css('visibility','hidden');
+         	$(stageRef.lookupSelector("lblP1")).css('display','block');
+         $(stageRef.lookupSelector("lblP2")).css('display','block');
          	iStap =0;	
          	// stop the timeline at the given position (ms or label)
          	sym.stop(0);
-         	
+         
          }
          
 
