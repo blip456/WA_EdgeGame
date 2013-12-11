@@ -76,7 +76,7 @@
 			"timelineColor":"0xffd46d"},
 		"codeTreeElementPopupFilter":""},
 	"LockGuides":"false",
-	"pref__general__codeView":"sectionalView",
+	"pref__general__codeView":"fullView",
 	"Preloader-Default Timeline_playhead_ms":"0",
 	"pref__general__FilterNonAnimatedElements":"false",
 	"highscore-Default Timeline_playhead_ms":"0",

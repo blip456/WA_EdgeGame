@@ -98,13 +98,13 @@ function checkWhoPlays()
 	if(isTurnP1 == true)
 	{
 		$(stageRef.lookupSelector("txtPlayer1")).html("Jouw beurt");
-		$(stageRef.lookupSelector("txtPlayer2")).html(sPlayer2Name);
+		$(stageRef.lookupSelector("txtPlayer2")).html(sPlayer2Name.substr(0,10));
 		
 	}
 	else if(isTurnP1 == false)
 	{
 		$(stageRef.lookupSelector("txtPlayer2")).html("Jouw beurt");
-		$(stageRef.lookupSelector("txtPlayer1")).html(sPlayer1Name);
+		$(stageRef.lookupSelector("txtPlayer1")).html(sPlayer1Name.substr(0,10));
 	}
 }
 function mouseOverSymbol(sSymbol, sItem)
