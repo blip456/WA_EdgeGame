@@ -295,12 +295,14 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          stageRef.$("EndGame").css('visibility','hidden');
          stageRef.$("highscore").css('visibility','hidden');
          stageRef.$("uitleg").css('visibility','hidden');
+         console.log("haha");
          var nameP1 = sym.$("lblP1");
          nameP1.html("Speler 1: ");
          inputNameP1 = $('<input />').attr({'type':'text', 'value':'', 'id':'nameP1'});
          inputNameP1.css('height', 30);
          inputNameP1.css('font-size', 25);
          inputNameP1.css('width', 200);
+         inputNameP1.css('display', 'inline');
          inputNameP1.appendTo(nameP1);
          
          var nameP2 = sym.$("lblP2");
@@ -310,8 +312,11 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
          inputNameP2.css('font-size', 25);
          inputNameP2.css('width', 200);
          inputNameP2.appendTo(nameP2);
-         
+         console.log(nameP2);
+         console.log(sym.$("lblP2"));
          InitGame();
+         
+         $(stageRef.lookupSelector('lblP1')).css('display','block');
 
       });
       //Edge binding end
@@ -676,6 +681,14 @@ var Composition = Edge.Composition, Symbol = Edge.Symbol; // aliases for commonl
       Symbol.bindElementAction(compId, symbolName, "${_btnUitleg}", "mouseover", function(sym, e) {
          // insert code to be run when the mouse hovers over the object
          mouseOverSymbol("animation","btnUitleg");
+
+      });
+      //Edge binding end
+
+      Symbol.bindTriggerAction(compId, symbolName, "Default Timeline", 3000, function(sym, e) {
+         // insert code here
+         $(stageRef.lookupSelector("lblP1")).css('display','block');
+         $(stageRef.lookupSelector("lblP2")).css('display','block');
 
       });
       //Edge binding end
